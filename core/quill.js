@@ -63,6 +63,7 @@ class Quill {
   }
 
   constructor(container, options = {}) {
+    // 合并参数配置
     this.options = expandConfig(container, options);
     this.container = this.options.container;
     if (this.container == null) {
@@ -75,6 +76,7 @@ class Quill {
     this.container.classList.add('ql-container');
     this.container.innerHTML = '';
     instances.set(this.container, this);
+    // 增加一个空的容器
     this.root = this.addContainer('ql-editor');
     this.root.classList.add('ql-blank');
     this.scrollingContainer = this.options.scrollingContainer || this.root;
@@ -88,10 +90,12 @@ class Quill {
     this.editor = new Editor(this.scroll);
     this.selection = new Selection(this.scroll, this.emitter);
     this.theme = new this.options.theme(this, this.options); // eslint-disable-line new-cap
+    // 增加编辑器内置模块
     this.keyboard = this.theme.addModule('keyboard');
     this.clipboard = this.theme.addModule('clipboard');
     this.history = this.theme.addModule('history');
     this.uploader = this.theme.addModule('uploader');
+    // 渲染编辑器内容
     this.theme.init();
     this.emitter.on(Emitter.events.EDITOR_CHANGE, type => {
       if (type === Emitter.events.TEXT_CHANGE) {

@@ -9,6 +9,7 @@ const debug = logger('quill:toolbar');
 class Toolbar extends Module {
   constructor(quill, options) {
     super(quill, options);
+    // container包含toolbars配置
     if (Array.isArray(this.options.container)) {
       const container = document.createElement('div');
       addControls(container, this.options.container);
