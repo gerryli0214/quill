@@ -130,10 +130,6 @@ class Quill {
     }
   }
 
-<<<<<<< HEAD:core/quill.js
-  constructor(container, options = {}) {
-    // 合并参数配置
-=======
   scrollingContainer: HTMLElement;
   container: HTMLElement;
   root: HTMLDivElement;
@@ -152,7 +148,6 @@ class Quill {
   options: ExpandedOptions;
 
   constructor(container: HTMLElement, options: Options = {}) {
->>>>>>> d2f689fb4744cdada96c632a8bccf6d476932d7b:core/quill.ts
     this.options = expandConfig(container, options);
     this.container = this.options.container;
     if (this.container == null) {
@@ -589,11 +584,11 @@ class Quill {
       ...args:
         | [typeof Emitter['events']['TEXT_CHANGE'], Delta, Delta, EmitterSource]
         | [
-            typeof Emitter['events']['SELECTION_CHANGE'],
-            Range,
-            Range,
-            EmitterSource,
-          ]
+          typeof Emitter['events']['SELECTION_CHANGE'],
+          Range,
+          Range,
+          EmitterSource,
+        ]
     ) => void,
   ): Emitter;
   on(event: string, ...args: unknown[]): Emitter;
