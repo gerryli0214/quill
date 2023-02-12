@@ -1,35 +1,28 @@
 class Theme {
-  constructor(quill, options) {
-    this.quill = quill;
-    this.options = options;
-    this.modules = {};
-  }
-
-  init() {
-    Object.keys(this.options.modules).forEach(name => {
-      // 挂载options中module配置
-      if (this.modules[name] == null) {
-        this.addModule(name);
-      }
-    });
-  }
-
-  addModule(name) {
-    // 导入模块类
-    const ModuleClass = this.quill.constructor.import(`modules/${name}`);
-    // 实例化各个module
-    this.modules[name] = new ModuleClass(
-      this.quill,
-      this.options.modules[name] || {},
-    );
-    return this.modules[name];
-  }
+    constructor(quill, options) {
+        this.quill = quill;
+        this.options = options;
+        this.modules = {};
+    }
+    init() {
+        Object.keys(this.options.modules).forEach(name => {
+            if (this.modules[name] == null) {
+                this.addModule(name);
+            }
+        });
+    }
+    addModule(name) {
+        // @ts-expect-error
+        const ModuleClass = this.quill.constructor.import(`modules/${name}`);
+        this.modules[name] = new ModuleClass(this.quill, this.options.modules[name] || {});
+        return this.modules[name];
+    }
 }
 Theme.DEFAULTS = {
-  modules: {},
+    modules: {},
 };
 Theme.themes = {
-  default: Theme,
+    default: Theme,
 };
-
 export default Theme;
+//# sourceMappingURL=theme.js.map

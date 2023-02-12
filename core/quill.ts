@@ -43,7 +43,9 @@ interface ExpandedOptions extends Omit<Options, 'theme'> {
   container: HTMLElement;
   modules: Record<string, unknown>;
 }
-
+/**
+ * @description 编辑器入口类
+ */
 class Quill {
   static DEFAULTS: Partial<Options> = {
     bounds: null,
@@ -148,7 +150,9 @@ class Quill {
   options: ExpandedOptions;
 
   constructor(container: HTMLElement, options: Options = {}) {
+    // 合并配置项
     this.options = expandConfig(container, options);
+    // 编辑器所在的容器
     this.container = this.options.container;
     if (this.container == null) {
       debug.error('Invalid Quill container', container);
@@ -165,11 +169,13 @@ class Quill {
     this.root = this.addContainer('ql-editor');
     this.root.classList.add('ql-blank');
     this.scrollingContainer = this.options.scrollingContainer || this.root;
+    // 发布订阅实例
     this.emitter = new Emitter();
     // @ts-expect-error TODO: fix BlotConstructor
     const ScrollBlot = this.options.registry.query(
       Parchment.ScrollBlot.blotName,
     ) as ScrollConstructor;
+
     this.scroll = new ScrollBlot(this.options.registry, this.root, {
       emitter: this.emitter,
     });
@@ -702,9 +708,11 @@ function expandConfig(
     },
     userConfig,
   );
+  // 不声明使用默认主题
   if (!expandedConfig.theme || expandedConfig.theme === Quill.DEFAULTS.theme) {
     expandedConfig.theme = Theme;
   } else {
+    // 默认包含base,bubble,snow三个主题
     expandedConfig.theme = Quill.import(`themes/${expandedConfig.theme}`);
     if (expandedConfig.theme == null) {
       throw new Error(
@@ -712,6 +720,7 @@ function expandConfig(
       );
     }
   }
+  // 合并主题的模块
   const themeConfig = cloneDeep(expandedConfig.theme.DEFAULTS);
   [themeConfig, expandedConfig].forEach(config => {
     config.modules = config.modules || {};
