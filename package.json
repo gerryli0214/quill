@@ -22,6 +22,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.merge": "^4.5.0",
     "parchment": "^2.0.1",
+    "puppeteer": "^19.7.1",
     "quill-delta": "^5.0.0"
   },
   "devDependencies": {
@@ -80,7 +81,7 @@
   "scripts": {
     "build": "npm run lint && npm run build:typescript && npm run build:webpack",
     "build:typescript": "tsc",
-    "build:webpack": "webpack --config _develop/webpack.config.js; rm dist/quill.core dist/quill.bubble dist/quill.snow",
+    "build:webpack": "webpack --config ./_develop/webpack.config.js; rm dist/quill.core dist/quill.bubble dist/quill.snow",
     "build:release": "./_develop/scripts/release.sh",
     "develop": "npm run start",
     "lint": "npm run lint:eslint && npm run lint:tsc",

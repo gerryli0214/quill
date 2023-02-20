@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const Editor = ({
   children,
@@ -16,6 +16,7 @@ const Editor = ({
   }, [onSelectionChange]);
 
   useEffect(() => {
+    debugger
     const quill = new window.Quill(ref.current, config);
     if (rootStyleRef) {
       Object.assign(quill.root.style, rootStyleRef.current);

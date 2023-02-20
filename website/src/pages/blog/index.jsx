@@ -44,6 +44,30 @@ const Blog = ({ data }) => (
   </Default>
 );
 
+// export const query = graphql`
+//   query {
+//     allMdx(
+//       sort: { fields: frontmatter___date, order: DESC }
+//       filter: { fields: { pageType: { eq: "blog" } } }
+//     ) {
+//       nodes {
+//         fields {
+//           slug
+//           permalink
+//           excerpt
+//         }
+//         frontmatter {
+//           date(formatString: "DD MMM yyyy")
+//           title
+//         }
+//         id
+//         body
+//         excerpt
+//       }
+//     }
+//   }
+// `;
+
 export const query = graphql`
   query {
     allMdx(
@@ -54,7 +78,6 @@ export const query = graphql`
         fields {
           slug
           permalink
-          excerpt
         }
         frontmatter {
           date(formatString: "DD MMM yyyy")
@@ -62,7 +85,6 @@ export const query = graphql`
         }
         id
         body
-        excerpt
       }
     }
   }
