@@ -175,7 +175,7 @@ class Quill {
     const ScrollBlot = this.options.registry.query(
       Parchment.ScrollBlot.blotName,
     ) as ScrollConstructor;
-
+    // 实例化scrollBlot
     this.scroll = new ScrollBlot(this.options.registry, this.root, {
       emitter: this.emitter,
     });

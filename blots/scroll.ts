@@ -242,7 +242,7 @@ class Scroll extends ScrollBlot {
 }
 
 export interface ScrollConstructor {
-  new (
+  new(
     registry: Registry,
     domNode: HTMLDivElement,
     options: { emitter: Emitter },

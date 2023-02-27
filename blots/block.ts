@@ -172,11 +172,12 @@ function blockDelta(blot: BlockBlot, filter = true) {
   return (
     blot
       // @ts-expect-error
-      .descendants(LeafBlot)
+      .descendants(LeafBlot) // 叶子节点
       .reduce((delta, leaf: LeafBlot) => {
-        if (leaf.length() === 0) {
+        if (leaf.length() === 0) { // 叶子节点的长度
           return delta;
         }
+        // 插入一个delta描述符
         return delta.insert(leaf.value(), bubbleFormats(leaf, {}, filter));
       }, new Delta())
       .insert('\n', bubbleFormats(blot))
